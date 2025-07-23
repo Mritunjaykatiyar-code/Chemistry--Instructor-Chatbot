@@ -1,1 +1,1 @@
-# Chemistry--Instructor-Chatbot
+# Chemistry-Instructor-Chatbot
