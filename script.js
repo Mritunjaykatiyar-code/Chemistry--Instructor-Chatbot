@@ -9,7 +9,7 @@ const sendBtn = document.getElementById('send-btn');
 
 
 
-const API_KEY = "AIzaSyBYKpTrrwEIfJTnK0TnmwHC7awpBsvXbx8"; 
+const API_KEY = "Enter Your API key!!!!"; 
 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
