@@ -1,0 +1,354 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --bg-dark: #1a1a2e;
+    --bg-medium: #16213e;
+    --bg-light: #0f3460;
+    --accent-primary: #537895;
+    --accent-secondary: #e94560;
+    --text-light: #e0e0e0;
+    --text-dark: #ffffff;
+    --user-bubble: #0f3460;
+    --bot-bubble: #2e2e50;
+    --font-primary: 'Roboto', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+    --element-size: 32px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-dark);
+    background-image: 
+        linear-gradient(rgba(22, 33, 62, 0.9), rgba(22, 33, 62, 0.9)),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill="%230f3460" fill-opacity="0.4"><rect x="50" width="50" height="50"/><rect y="50" width="50" height="50"/></g></svg>');
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 1rem;
+}
+
+/* --- Lab Container --- */
+.lab-container {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    height: 95vh;
+    max-height: 900px;
+    background: var(--bg-medium);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    border: 1px solid var(--bg-light);
+    position: relative;
+}
+
+/* --- Lab Equipment Sidebar --- */
+.lab-equipment {
+    width: 80px;
+    background: var(--bg-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 1.5rem;
+    border-right: 1px solid var(--accent-primary);
+}
+
+.equipment-item {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.equipment-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.equipment-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(83, 120, 149, 0.7));
+}
+
+/* --- Main Chat Container --- */
+.chat-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* --- Header --- */
+.chat-header {
+    background: linear-gradient(to right, var(--bg-light), var(--accent-primary));
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--accent-primary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.lab-title h1 {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.lab-title p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.periodic-elements {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.element {
+    width: var(--element-size);
+    height: var(--element-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+.element:hover {
+    transform: scale(1.2) rotate(15deg);
+}
+
+/* --- Chat Window & Messages --- */
+.chat-window {
+    flex-grow: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-image: 
+        linear-gradient(rgba(22, 33, 62, 0.9), rgba(22, 33, 62, 0.9)),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill="%23537895" fill-opacity="0.1"><circle cx="25" cy="25" r="3"/><circle cx="75" cy="25" r="3"/><circle cx="25" cy="75" r="3"/><circle cx="75" cy="75" r="3"/></g></svg>');
+}
+
+/* Custom Scrollbar */
+.chat-window::-webkit-scrollbar {
+    width: 8px;
+}
+.chat-window::-webkit-scrollbar-track {
+    background: var(--bg-medium);
+}
+.chat-window::-webkit-scrollbar-thumb {
+    background-color: var(--accent-primary);
+    border-radius: 10px;
+    border: 2px solid var(--bg-medium);
+}
+
+.message {
+    max-width: 80%;
+    padding: 1rem;
+    border-radius: 12px;
+    line-height: 1.6;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.message p {
+    white-space: pre-wrap;
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-light);
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.user-message {
+    background-color: var(--user-bubble);
+    color: var(--text-dark);
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.bot-message {
+    background-color: var(--bot-bubble);
+    color: var(--text-light);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* --- Typing Indicator --- */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 1rem;
+}
+
+.typing-indicator span {
+    height: 10px;
+    width: 10px;
+    background-color: var(--accent-primary);
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
+}
+
+/* --- Chat Input Form --- */
+.chat-form {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid var(--bg-light);
+    background: var(--bg-medium);
+    gap: 0.5rem;
+}
+
+.input-container {
+    flex-grow: 1;
+    display: flex;
+    background: var(--bg-dark);
+    border-radius: 20px;
+    overflow: hidden;
+    padding-right: 10px;
+}
+
+#user-input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    padding: 0.75rem 1rem;
+    color: var(--text-light);
+    font-size: 1rem;
+    outline: none;
+}
+
+#user-input::placeholder {
+    color: #6a6a7a;
+}
+
+#user-input:focus {
+    box-shadow: 0 0 0 2px var(--accent-primary);
+}
+
+.chemistry-buttons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.chem-button {
+    background: transparent;
+    border: none;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--accent-primary);
+    transition: background 0.3s;
+}
+
+.chem-button:hover {
+    background: rgba(83, 120, 149, 0.2);
+}
+
+#send-btn {
+    background: var(--accent-secondary);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+#send-btn:hover {
+    background: #ff6b81;
+    transform: scale(1.1);
+}
+
+#send-btn svg {
+    fill: white;
+    transform: translateX(1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .lab-equipment {
+        width: 60px;
+    }
+    
+    .periodic-elements {
+        position: static;
+        margin-top: 0.5rem;
+        justify-content: center;
+    }
+    
+    .chat-header {
+        text-align: center;
+    }
+    
+    .message {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .lab-equipment {
+        display: none;
+    }
+    
+    .lab-title h1 {
+        font-size: 1.2rem;
+    }
+}
